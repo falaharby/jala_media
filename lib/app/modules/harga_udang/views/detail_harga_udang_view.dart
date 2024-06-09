@@ -30,9 +30,9 @@ class DetailHargaUdangView extends StatelessWidget {
             onTap: () async {
               await Share.share('$BASE_URL/shrimp_prices/${hargaUdang.id}');
             },
-            child: Padding(
-              padding: const EdgeInsets.only(right: 16),
-              child: const Icon(
+            child: const Padding(
+              padding: EdgeInsets.only(right: 16),
+              child: Icon(
                 Icons.share_outlined,
                 color: whiteColor,
                 size: 24,
