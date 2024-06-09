@@ -1,0 +1,42 @@
+name: jala_media
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment:
+  sdk: '>=3.4.1 <4.0.0'
+
+dependencies:
+  cupertino_icons: ^1.0.6
+  dio: ^5.4.3+1
+  flutter:
+    sdk: flutter
+  get: 4.6.6
+  intl: ^0.19.0
+  lazy_load_scrollview: ^1.3.0
+  shimmer: ^3.0.0
+  url_launcher: ^6.3.0
+
+dev_dependencies:
+  flutter_lints: 4.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/ask_jali.png
+    - assets/images/quiz_jala.png
+    - assets/images/404.png
+  fonts:
+    - family: JalaIcon
+      fonts:
+        - asset: assets/icons/JalaIcon.ttf
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/Lato/Lato-Regular.ttf
+        - asset: assets/fonts/Lato/Lato-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Lato/Lato-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Lato/Lato-Black.ttf
+          weight: 900
