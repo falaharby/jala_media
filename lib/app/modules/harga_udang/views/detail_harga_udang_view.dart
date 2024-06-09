@@ -9,6 +9,7 @@ import 'package:jala_media/app/utils/price.dart';
 import 'package:jala_media/app/widgets/badge_terverifikasi.dart';
 import 'package:jala_media/app/widgets/button_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:share_plus/share_plus.dart';
 
 class DetailHargaUdangView extends StatelessWidget {
   DetailHargaUdangView({super.key});
@@ -24,6 +25,21 @@ class DetailHargaUdangView extends StatelessWidget {
         title: const Text(
           'Harga Udang',
         ),
+        actions: [
+          GestureDetector(
+            onTap: () async {
+              await Share.share('$BASE_URL/shrimp_prices/${hargaUdang.id}');
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(right: 16),
+              child: const Icon(
+                Icons.share_outlined,
+                color: whiteColor,
+                size: 24,
+              ),
+            ),
+          ),
+        ],
       ),
       backgroundColor: appBackgroundColor,
       body: SingleChildScrollView(

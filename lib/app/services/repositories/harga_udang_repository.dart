@@ -12,4 +12,13 @@ class HargaUdangRepository {
 
     return HargaUdang.fromJson(res.data);
   }
+
+  Future<HargaUdang> getHargaUdangDetail({int? id, String? regionId}) async {
+    var res = await Api().get('/shrimp_prices/$id', queryParameters: {
+      'with': 'region,creator',
+      'region_id': regionId,
+    });
+
+    return HargaUdang.fromJson(res.data);
+  }
 }
