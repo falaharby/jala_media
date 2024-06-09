@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:jala_media/app/modules/harga_udang/controllers/harga_udang_controller.dart';
 import 'package:jala_media/app/modules/harga_udang/views/harga_udang_view.dart';
 import 'package:jala_media/app/modules/info_penyakit/views/info_penyakit_view.dart';
 import 'package:jala_media/app/modules/kabar_udang/views/kabar_udang_view.dart';
 import 'package:jala_media/app/utils/colors.dart';
-import 'package:jala_media/app/widgets/floating_button.dart';
-import 'package:jala_media/app/widgets/size_bottom_sheet.dart';
 import 'package:jala_media/app/widgets/tab_header.dart';
 
 import '../controllers/jala_media_controller.dart';

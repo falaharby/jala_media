@@ -26,7 +26,7 @@ class EmptyData extends StatelessWidget {
             ),
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 color: primaryDarkColor,
                 fontSize: 24,
                 fontWeight: FontWeight.w700,

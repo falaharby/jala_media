@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:jala_media/app/utils/colors.dart';
@@ -33,14 +34,26 @@ class PostCard extends StatelessWidget {
           child: Column(
             children: [
               imgUrl == null
-                  ? const SizedBox()
+                  ? Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 160,
+                      color: shadowColor,
+                      child: const Center(
+                        child: Icon(
+                          Icons.image_not_supported_outlined,
+                          color: greyIconColor,
+                          size: 42,
+                        ),
+                      ),
+                    )
                   : Container(
                       width: MediaQuery.of(context).size.width,
                       height: 160,
                       decoration: BoxDecoration(
                         color: shadowColor,
                         image: DecorationImage(
-                          image: NetworkImage(STORAGE_URL + (imgUrl ?? '')),
+                          image: CachedNetworkImageProvider(
+                              STORAGE_URL + (imgUrl ?? '')),
                           fit: BoxFit.cover,
                         ),
                       ),

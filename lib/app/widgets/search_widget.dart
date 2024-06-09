@@ -52,7 +52,7 @@ class SearchWidget extends StatelessWidget {
           minWidth: 24,
           minHeight: 24,
         ),
-        hintStyle: TextStyle(color: hintColor),
+        hintStyle: const TextStyle(color: hintColor),
         prefixIcon: Container(
           padding: const EdgeInsets.only(right: 4, left: 8),
           child: const Icon(

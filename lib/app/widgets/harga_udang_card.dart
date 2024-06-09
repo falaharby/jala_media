@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:jala_media/app/utils/colors.dart';
@@ -7,7 +8,7 @@ import 'package:jala_media/app/widgets/badge_terverifikasi.dart';
 import 'package:jala_media/app/widgets/button_widget.dart';
 
 class HargaUdangCard extends StatelessWidget {
-  HargaUdangCard({
+  const HargaUdangCard({
     super.key,
     this.role,
     this.nama,
@@ -20,10 +21,10 @@ class HargaUdangCard extends StatelessWidget {
     this.size = 0,
     required this.onPressed,
   });
-  String? role, nama, tanggal, provinsi, daerah, avatar;
-  bool isVerif;
-  int? size, harga;
-  VoidCallback onPressed;
+  final String? role, nama, tanggal, provinsi, daerah, avatar;
+  final bool isVerif;
+  final int? size, harga;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +61,7 @@ class HargaUdangCard extends StatelessWidget {
                         color: Colors.grey,
                         image: avatar != null
                             ? DecorationImage(
-                                image: NetworkImage(
+                                image: CachedNetworkImageProvider(
                                   STORAGE_URL + (avatar ?? ''),
                                 ),
                               )
@@ -70,25 +71,27 @@ class HargaUdangCard extends StatelessWidget {
                     const SizedBox(
                       width: 8,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          role ?? '',
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: captionColor,
-                            letterSpacing: 0.3,
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            role ?? '',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: captionColor,
+                              letterSpacing: 0.3,
+                            ),
                           ),
-                        ),
-                        Text(
-                          nama ?? '-',
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: titleColor,
+                          Text(
+                            nama ?? '-',
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: titleColor,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     )
                   ],
                 ),

@@ -18,7 +18,7 @@ class HargaUdang {
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    if (data != null) {
+    if (dataUdang != null) {
       data['data'] = dataUdang?.map((v) => v.toJson()).toList();
     }
     if (links != null) {

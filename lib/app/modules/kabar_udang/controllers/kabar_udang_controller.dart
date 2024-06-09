@@ -11,6 +11,8 @@ class KabarUdangController extends GetxController {
   RxBool fetchNextLoading = false.obs;
   RxBool isNextPage = false.obs;
 
+  RxInt webviewLoading = 0.obs;
+
   final repo = KabarUdangRepository();
 
   @override

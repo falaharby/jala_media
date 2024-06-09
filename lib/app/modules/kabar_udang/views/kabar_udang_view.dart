@@ -11,7 +11,7 @@ import 'package:share_plus/share_plus.dart';
 import '../controllers/kabar_udang_controller.dart';
 
 class KabarUdangView extends GetView<KabarUdangController> {
-  const KabarUdangView({Key? key}) : super(key: key);
+  const KabarUdangView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,11 +61,11 @@ class KabarUdangView extends GetView<KabarUdangController> {
                       ),
                     ),
                     controller.isNextPage.value
-                        ? Center(
-                            child: Container(
+                        ? const Center(
+                            child: SizedBox(
                               width: 40,
                               height: 40,
-                              child: const CircularProgressIndicator(
+                              child: CircularProgressIndicator(
                                 color: primaryColor,
                               ),
                             ),

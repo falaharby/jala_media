@@ -1,4 +1,5 @@
-import 'dart:io';
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:jala_media/app/utils/config.dart';
 
@@ -57,12 +58,12 @@ class Api {
     void Function(int, int)? onReceiveProgress,
     bool addRequestInterceptor = true,
   }) async {
-    print("GETTING API FROM : ${dio.options.baseUrl + path}");
+    log("GETTING API FROM : ${dio.options.baseUrl + path}");
     if (addRequestInterceptor) {
       dio.interceptors
           .add(RequestInterceptor(dio, apiKey: apiKey, token: token));
     }
-    print("QUERY PARAMS=>${queryParameters}");
+    log("QUERY PARAMS=>$queryParameters");
     return await dio.get(dio.options.baseUrl + path,
         onReceiveProgress: onReceiveProgress,
         cancelToken: cancelToken,
@@ -81,13 +82,13 @@ class Api {
     void Function(int, int)? onReceiveProgress,
     bool addRequestInterceptor = true,
   }) async {
-    print("URL : ${dio.options.baseUrl + path}");
-    print("Request body : ${data}");
+    log("URL : ${dio.options.baseUrl + path}");
+    log("Request body : $data");
     if (addRequestInterceptor) {
       dio.interceptors
           .add(RequestInterceptor(dio, apiKey: apiKey, token: token));
     }
-    return await dio.post(this.dio.options.baseUrl + path,
+    return await dio.post(dio.options.baseUrl + path,
         data: FormData.fromMap(data),
         queryParameters: queryParameters,
         options: options,
@@ -112,8 +113,8 @@ class ErrorInterceptor extends Interceptor {
       case DioExceptionType.receiveTimeout:
         throw ReceiveTimeOutException(err.requestOptions);
       case DioExceptionType.badResponse:
-        print("STATUS CODE : ${err.response?.statusCode}");
-        print("${err.response?.data}");
+        log("STATUS CODE : ${err.response?.statusCode}");
+        log("${err.response?.data}");
         switch (err.response?.statusCode) {
           case 400:
             throw BadRequestException(err.requestOptions);
@@ -130,7 +131,7 @@ class ErrorInterceptor extends Interceptor {
       case DioExceptionType.cancel:
         break;
       case DioExceptionType.unknown:
-        print(err.message);
+        log(err.message.toString());
         throw NoInternetConnectionException(err.requestOptions);
       case DioExceptionType.badCertificate:
         break;
@@ -150,7 +151,7 @@ class RequestInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    options.headers = {'apiKey': apiKey, 'token': token};
+    options.headers = {'apiKey': apiKey, 'Authorization': 'Bearer $token'};
     return handler.next(options);
   }
 }

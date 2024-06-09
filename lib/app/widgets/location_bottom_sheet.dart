@@ -14,7 +14,7 @@ import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'package:shimmer/shimmer.dart';
 
 class LocationBottomSheet extends StatefulWidget {
-  LocationBottomSheet({
+  const LocationBottomSheet({
     super.key,
     required this.onSelect,
   });
