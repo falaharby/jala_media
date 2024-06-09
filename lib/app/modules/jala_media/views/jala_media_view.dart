@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:jala_media/app/modules/harga_udang/controllers/harga_udang_controller.dart';
 import 'package:jala_media/app/modules/harga_udang/views/harga_udang_view.dart';
 import 'package:jala_media/app/modules/info_penyakit/views/info_penyakit_view.dart';
+import 'package:jala_media/app/modules/kabar_udang/views/kabar_udang_view.dart';
 import 'package:jala_media/app/utils/colors.dart';
 import 'package:jala_media/app/widgets/floating_button.dart';
 import 'package:jala_media/app/widgets/size_bottom_sheet.dart';
@@ -31,9 +32,9 @@ class JalaMediaView extends GetView<JalaMediaController> {
         ),
         body: SizedBox(
           width: MediaQuery.of(context).size.width,
-          child: Column(
+          child: const Column(
             children: [
-              const TabBar(
+              TabBar(
                 indicatorPadding: EdgeInsets.zero,
                 indicator: UnderlineTabIndicator(
                   borderSide: BorderSide(width: 5, color: primaryColor),
@@ -59,9 +60,7 @@ class JalaMediaView extends GetView<JalaMediaController> {
                 child: TabBarView(
                   children: [
                     HargaUdangView(),
-                    Container(
-                      color: Colors.blue,
-                    ),
+                    KabarUdangView(),
                     InfoPenyakitView(),
                   ],
                 ),

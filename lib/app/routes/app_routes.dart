@@ -8,6 +8,7 @@ abstract class Routes {
   static const JALA_MEDIA = _Paths.JALA_MEDIA;
   static const HARGA_UDANG = _Paths.HARGA_UDANG;
   static const INFO_PENYAKIT = _Paths.INFO_PENYAKIT;
+  static const KABAR_UDANG = _Paths.KABAR_UDANG;
 }
 
 abstract class _Paths {
@@ -15,4 +16,5 @@ abstract class _Paths {
   static const JALA_MEDIA = '/jala-media';
   static const HARGA_UDANG = '/harga-udang';
   static const INFO_PENYAKIT = '/info-penyakit';
+  static const KABAR_UDANG = '/kabar-udang';
 }

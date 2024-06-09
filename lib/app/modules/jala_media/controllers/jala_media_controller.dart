@@ -1,18 +1,3 @@
 import 'package:get/get.dart';
 
-class JalaMediaController extends GetxController {
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-}
+class JalaMediaController extends GetxController {}
