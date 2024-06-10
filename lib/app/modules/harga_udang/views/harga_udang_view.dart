@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:jala_media/app/data/models/daerah_model.dart';
 import 'package:jala_media/app/modules/harga_udang/controllers/harga_udang_controller.dart';
@@ -189,25 +190,44 @@ class HargaUdangView extends GetView<HargaUdangController> {
           width: MediaQuery.of(context).size.width,
           color: whiteColor,
           padding: const EdgeInsets.only(bottom: 16),
-          child: const SingleChildScrollView(
+          child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Padding(
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 horizontal: 14,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Image(
-                    width: 271,
-                    image: AssetImage('assets/images/ask_jali.png'),
+                  GestureDetector(
+                    onTap: () {
+                      showImageDialog(
+                        context,
+                        title: 'Ask Jali',
+                        subtitle: 'Gambar Ask Jali telah ditekan oleh Anda!',
+                      );
+                    },
+                    child: const Image(
+                      width: 271,
+                      image: AssetImage('assets/images/ask_jali.png'),
+                    ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 16,
                   ),
-                  Image(
-                    width: 271,
-                    image: AssetImage('assets/images/quiz_jala.png'),
+                  GestureDetector(
+                    onTap: () {
+                      showImageDialog(
+                        context,
+                        title: 'Quiz by JALA',
+                        subtitle:
+                            'Gambar Quiz by JALA telah ditekan oleh Anda!',
+                      );
+                    },
+                    child: const Image(
+                      width: 271,
+                      image: AssetImage('assets/images/quiz_jala.png'),
+                    ),
                   ),
                 ],
               ),
@@ -215,6 +235,37 @@ class HargaUdangView extends GetView<HargaUdangController> {
           ),
         ),
       ],
+    );
+  }
+
+  void showImageDialog(BuildContext context,
+      {String? title, String? subtitle}) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        titlePadding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
+        contentPadding: const EdgeInsets.fromLTRB(16, 4, 16, 16),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(8.0),
+          ),
+        ),
+        title: Text(
+          title ?? '',
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontWeight: FontWeight.w900,
+            color: primaryColor,
+          ),
+        ),
+        content: Text(
+          subtitle ?? '',
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            color: titleColor,
+          ),
+        ),
+      ),
     );
   }
 
