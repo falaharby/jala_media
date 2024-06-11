@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:jala_media/app/data/models/kabar_udang_model.dart';
 import 'package:jala_media/app/services/repositories/kabar_udang_repository.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 class KabarUdangController extends GetxController {
   RxList<DataKabarUdang> listKabarUdang = List<DataKabarUdang>.empty().obs;
@@ -23,24 +24,31 @@ class KabarUdangController extends GetxController {
   }
 
   void fetchKabarUdang() async {
-    if (listKabarUdang.isEmpty) {
-      fetchLoading.value = true;
-    } else {
-      fetchNextLoading.value = true;
-    }
-
-    await repo.getKabarUdang(page: page.value).then((res) {
-      if (res.links?.next != null) {
-        isNextPage.value = true;
-        page.value += 1;
+    try {
+      if (listKabarUdang.isEmpty) {
+        fetchLoading.value = true;
       } else {
-        isNextPage.value = false;
+        fetchNextLoading.value = true;
       }
-      listKabarUdang.addAll(res.data ?? []);
 
-      fetchNextLoading.value = false;
-      fetchLoading.value = false;
-    });
+      await repo.getKabarUdang(page: page.value).then((res) {
+        if (res.links?.next != null) {
+          isNextPage.value = true;
+          page.value += 1;
+        } else {
+          isNextPage.value = false;
+        }
+        listKabarUdang.addAll(res.data ?? []);
+
+        fetchNextLoading.value = false;
+        fetchLoading.value = false;
+      });
+    } catch (exception, stackTrace) {
+      await Sentry.captureException(
+        exception,
+        stackTrace: stackTrace,
+      );
+    }
   }
 
   resetValue() {

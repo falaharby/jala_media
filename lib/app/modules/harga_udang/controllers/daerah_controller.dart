@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:jala_media/app/data/models/daerah_model.dart';
 import 'package:jala_media/app/services/repositories/daerah_repository.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 class DaerahController extends GetxController {
   RxList<DataDaerah> listDaerah = List<DataDaerah>.empty().obs;
@@ -24,25 +25,32 @@ class DaerahController extends GetxController {
   }
 
   fetchDaerah() async {
-    if (listDaerah.isEmpty) {
-      fetchLoading.value = true;
-    } else {
-      fetchNextLoading.value = true;
-    }
-
-    await repo.getDaerah(page: page.value, search: search.value).then((res) {
-      if (res.links?.next != null) {
-        isNextPage.value = true;
-        page.value += 1;
+    try {
+      if (listDaerah.isEmpty) {
+        fetchLoading.value = true;
       } else {
-        isNextPage.value = false;
+        fetchNextLoading.value = true;
       }
 
-      listDaerah.addAll(res.data ?? []);
+      await repo.getDaerah(page: page.value, search: search.value).then((res) {
+        if (res.links?.next != null) {
+          isNextPage.value = true;
+          page.value += 1;
+        } else {
+          isNextPage.value = false;
+        }
 
-      fetchNextLoading.value = false;
-      fetchLoading.value = false;
-    });
+        listDaerah.addAll(res.data ?? []);
+
+        fetchNextLoading.value = false;
+        fetchLoading.value = false;
+      });
+    } catch (exception, stackTrace) {
+      await Sentry.captureException(
+        exception,
+        stackTrace: stackTrace,
+      );
+    }
   }
 
   resetValue() {

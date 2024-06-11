@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:jala_media/app/data/models/penyakit_model.dart';
 import 'package:jala_media/app/services/repositories/info_penyakit_repository.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 class InfoPenyakitController extends GetxController {
   RxList<DataPenyakit> listPenyakit = List<DataPenyakit>.empty().obs;
@@ -23,24 +24,31 @@ class InfoPenyakitController extends GetxController {
   }
 
   void fetchListPenyakit() async {
-    if (listPenyakit.isEmpty) {
-      fetchLoading.value = true;
-    } else {
-      fetchNextLoading.value = true;
-    }
-
-    await repo.getListPenyakit(page: page.value).then((res) {
-      if (res.links?.next != null) {
-        isNextPage.value = true;
-        page.value += 1;
+    try {
+      if (listPenyakit.isEmpty) {
+        fetchLoading.value = true;
       } else {
-        isNextPage.value = false;
+        fetchNextLoading.value = true;
       }
-      listPenyakit.addAll(res.data ?? []);
 
-      fetchNextLoading.value = false;
-      fetchLoading.value = false;
-    });
+      await repo.getListPenyakit(page: page.value).then((res) {
+        if (res.links?.next != null) {
+          isNextPage.value = true;
+          page.value += 1;
+        } else {
+          isNextPage.value = false;
+        }
+        listPenyakit.addAll(res.data ?? []);
+
+        fetchNextLoading.value = false;
+        fetchLoading.value = false;
+      });
+    } catch (exception, stackTrace) {
+      await Sentry.captureException(
+        exception,
+        stackTrace: stackTrace,
+      );
+    }
   }
 
   resetValue() {
