@@ -4,6 +4,7 @@ Technical Test for JALA.
 
 ## Flutter Version
 
+```
 [√] Flutter (Channel stable, 3.22.1, on Microsoft Windows [Version 10.0.22631.3593], locale en-ID)
     • Flutter version 3.22.1 on channel stable at C:\src\flutter
     • Upstream repository https://github.com/flutter/flutter.git
@@ -48,3 +49,4 @@ Technical Test for JALA.
 
 [√] Network resources
     • All expected network resources are available.
+```
