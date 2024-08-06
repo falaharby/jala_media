@@ -23,7 +23,7 @@ class DetailHargaUdangView extends StatelessWidget {
       appBar: AppBar(
         titleSpacing: 0,
         title: const Text(
-          'Harga Udang',
+          'Harga Udang Z',
         ),
         actions: [
           GestureDetector(
